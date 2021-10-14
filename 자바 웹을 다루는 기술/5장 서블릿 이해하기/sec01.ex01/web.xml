@@ -10,7 +10,7 @@
   </servlet>
   <servlet-mapping> <!-- 브라우저에서 요청하는 논리적인 서블릿 설정 -->
   	<servlet-name>first</servlet-name> <!-- 매핑 이름으로 요청 시 값이 같은 <servlet> 태그안의 <servlet-name> 태그와 연결 -->
-  	<url-pattern>/first</url-pattern> <!--  브라우저에서 sec01.ex01.FirstServlet을 요청하는 논리적인 서블릿 이름 -->
+  	<url-pattern>/first</url-pattern> <!--  브라우저에서 sec01.sec01.ex01.FirstServlet을 요청하는 논리적인 서블릿 이름 -->
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>second</servlet-name>
