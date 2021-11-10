@@ -25,4 +25,24 @@ public class UserController extends MultiActionController{
 		
 		return mav;
 	}	
+	
+	public ModelAndView memberInfo(HttpServletRequest request,
+				HttpServletResponse response) throws Exception{
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView();
+		String id = request.getParameter("id");
+		String pwd = request.getParameter("pwd");
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		
+		// 회원 가입창에서 전송된 회원 정보를 addObject() 메서드 이용해 ModelAndView 객체에 바인딩
+		mav.addObject("id",id);
+		mav.addObject("pwd",pwd);
+		mav.addObject("name",name);
+		mav.addObject("email",email);
+		
+		// memberInfo.jsp로 포워딩
+		mav.setViewName("memberInfo");
+		return mav;
+	}	
 }
