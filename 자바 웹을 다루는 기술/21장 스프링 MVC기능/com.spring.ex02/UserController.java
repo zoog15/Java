@@ -7,24 +7,80 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 public class UserController extends MultiActionController{
+//	public ModelAndView login(HttpServletRequest request,
+//				HttpServletResponse response) throws Exception{
+//		String userID = "";
+//		String passwd = "";
+//		ModelAndView mav = new ModelAndView();
+//		request.setCharacterEncoding("utf-8");
+//		userID = request.getParameter("userID");
+//		passwd = request.getParameter("passwd");
+//		
+//		// ModelAndView에 로그인 정보 바인딩
+//		mav.addObject("userID",userID);
+//		mav.addObject("passwd",passwd);
+//		
+//		// ModelAndView 객체에 포워딩할 JSP 이름 설정
+//		mav.setViewName("result");
+//		
+//		return mav;
+//	}	
+	
 	public ModelAndView login(HttpServletRequest request,
-				HttpServletResponse response) throws Exception{
-		String userID = "";
-		String passwd = "";
-		ModelAndView mav = new ModelAndView();
-		request.setCharacterEncoding("utf-8");
-		userID = request.getParameter("userID");
-		passwd = request.getParameter("passwd");
+			HttpServletResponse response) throws Exception{
+	String userID = "";
+	String passwd = "";
+	// getViewName() 메서드를 호출해 요청명에서 확장명 .do를 제외한 뷰이름 가져옴
+	String viewName = getViewName(request);
+	ModelAndView mav = new ModelAndView();
+	request.setCharacterEncoding("utf-8");
+	userID = request.getParameter("userID");
+	passwd = request.getParameter("passwd");
+	
+	// ModelAndView에 로그인 정보 바인딩
+	mav.addObject("userID",userID);
+	mav.addObject("passwd",passwd);
+	
+	// ModelAndView 객체에 포워딩할 JSP 이름 설정
+//	mav.setViewName("result");
+	mav.setViewName(viewName);
+	
+	return mav;
+	}
+	
+	// request 객체에서 URL 요청명을 가져와 .do를 제외한 요청명을 구함
+	private String getViewName(HttpServletRequest request) throws Exception {
+		String contextPath = request.getContextPath();
+		String uri = (String)request.getAttribute("javax.servlet.include.request_uri");
 		
-		// ModelAndView에 로그인 정보 바인딩
-		mav.addObject("userID",userID);
-		mav.addObject("passwd",passwd);
+		if(uri == null || uri.trim().equals("")) {
+			uri = request.getRequestURI();
+		}
 		
-		// ModelAndView 객체에 포워딩할 JSP 이름 설정
-		mav.setViewName("result");
+		int begin = 0;
+		if(!((contextPath==null) || ("".equals(contextPath)))) {
+			begin = contextPath.length();
+		}
 		
-		return mav;
-	}	
+		int end;
+		if (uri.indexOf(";") != -1) {
+			end = uri.indexOf(";");
+		} else if (uri.indexOf("?") != -1) {
+			end = uri.indexOf("?");
+		} else {
+			end = uri.length();
+		}
+		
+		String fileName = uri.substring(begin, end);
+		if (fileName.indexOf(".") != -1) {
+			fileName = fileName.substring(0, fileName.lastIndexOf("."));
+		}
+		if (fileName.lastIndexOf("/") != -1) {
+			fileName = fileName.substring(fileName.lastIndexOf("/"), fileName.length());
+		}
+		
+		return fileName;
+	}
 	
 	public ModelAndView memberInfo(HttpServletRequest request,
 				HttpServletResponse response) throws Exception{
