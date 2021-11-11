@@ -1,6 +1,7 @@
 package com.spring.ex01;
 
 import java.io.Reader;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -28,11 +29,12 @@ public class MemberDAO {
 		return sqlMapper;
 	}
 	
-	public List<MemberVO> selectAllMemberList() {
+	public List<HashMap<String, String>> selectAllMemberList() {
 		sqlMapper = getInstance();
 		// 실제 member.xml의 SQL문을 호출하는데 사용되는 SqlSession 객체 가져옴
 		SqlSession session = sqlMapper.openSession();
-		List<MemberVO> memlist = null;
+		//List<MemberVO> memlist = null;
+		List<HashMap<String, String>> memlist = null;
 		
 		// 여러 개의 레코드를 조회하므로 selectList() 메서드에 실행하고자 하는 SQL문의 id를 인자로 전달
 		memlist = session.selectList("mapper.member.selectAllMemberList");

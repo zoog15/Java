@@ -1,6 +1,7 @@
 package com.spring.ex01;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -28,7 +29,8 @@ public class MemberServlet extends HttpServlet {
 		
 		// MemberDAO 객체를 생성하고 selectAllMemberList()를 호출
 		MemberDAO dao = new MemberDAO();
-		List<MemberVO> membersList = dao.selectAllMemberList();
+		// List<MemberVO> membersList = dao.selectAllMemberList();
+		List<HashMap<String, String>> membersList = dao.selectAllMemberList();
 		
 		request.setAttribute("membersList", membersList);
 		RequestDispatcher dispatch = request.getRequestDispatcher("test01/listMembers.jsp");
