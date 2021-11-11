@@ -2,6 +2,7 @@ package com.spring.ex04;
 
 import java.io.Reader;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -78,6 +79,14 @@ public class MemberDAO {
 		SqlSession session = sqlMapper.openSession();
 		int result = 0;
 		result = session.insert("mapper.member.insertMember", memberVO);
+		session.commit();
+		return result;
+	}
+	
+	public int insertMember2(Map<String, String> memberMap) {
+		sqlMapper = getInstance();
+		SqlSession session = sqlMapper.openSession();
+		int result = session.insert("mapper.member.insertMember2",memberMap);
 		session.commit();
 		return result;
 	}
