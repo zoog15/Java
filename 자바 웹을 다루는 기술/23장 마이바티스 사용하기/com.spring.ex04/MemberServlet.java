@@ -73,6 +73,17 @@ public class MemberServlet extends HttpServlet {
 			memberMap.put("email", email);
 			dao.insertMember2(memberMap);
 			nextPage = "/mem4.do?action=listMembers";
+		} else if(action.equals("updateMember")) {
+			String id = request.getParameter("id");
+			String pwd = request.getParameter("pwd");
+			String name = request.getParameter("name");
+			String email = request.getParameter("email");
+			memberVO.setId(id);
+			memberVO.setPwd(pwd);
+			memberVO.setName(name);
+			memberVO.setEmail(email);
+			dao.updateMember(memberVO);
+			nextPage = "/mem4.do?action=listMembers";
 		}
 		RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
 		dispatch.forward(request, response);

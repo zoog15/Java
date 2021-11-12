@@ -90,4 +90,12 @@ public class MemberDAO {
 		session.commit();
 		return result;
 	}
+	
+	public int updateMember(MemberVO memberVO) {
+		sqlMapper = getInstance();
+		SqlSession session = sqlMapper.openSession();
+		int result = session.update("mapper.member.updateMember", memberVO);
+		session.commit();
+		return result;
+	}
 }
