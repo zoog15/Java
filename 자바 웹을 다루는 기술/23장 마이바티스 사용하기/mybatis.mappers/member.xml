@@ -57,6 +57,22 @@
 		]]>
 	</select>
 
+	<select id="searchMember" parameterType="memberVO" resultMap="memResult">
+		<![CDATA[
+			select * from t_member
+		]]>
+		<where>
+			<!-- name 속성 값을 체크해 공백이 아니거나 null이 아니면 'name=name 속성 값' 조건절을 SQL문 뒤에 추가 -->
+			<if test="name != '' and name != null">
+				name = #{name}
+			</if>
+			<if test="email != '' and email != null">
+				and email=#{email}
+			</if>
+		</where>
+		order by joinDate desc
+	</select>
+
 	<insert id="insertMember" parameterType="memberVO">
 		<![CDATA[
 			insert into t_member(id, pwd, name, email)
@@ -85,4 +101,5 @@
 			where id = #{id}
 		]]>
 	</delete>
+	
 </mapper>
