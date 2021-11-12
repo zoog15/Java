@@ -98,4 +98,13 @@ public class MemberDAO {
 		session.commit();
 		return result;
 	}
+	
+	public int deleteMember(String id) {
+		sqlMapper = getInstance();
+		SqlSession session = sqlMapper.openSession();
+		int result = 0;
+		result = session.delete("mapper.member.deleteMember", id);
+		session.commit();
+		return result;
+	}
 }
