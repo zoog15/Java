@@ -121,4 +121,12 @@ public class MemberDAO {
 		List<MemberVO> list = session.selectList("mapper.member.foreachSelect",nameList);
 		return list;
 	}
+	
+	public int foreachInsert(List<MemberVO> memList) {
+		sqlMapper = getInstance();
+		SqlSession session = sqlMapper.openSession();
+		int result = session.insert("mapper.member.foreachInsert",memList);
+		session.commit();
+		return result;
+	}
 }

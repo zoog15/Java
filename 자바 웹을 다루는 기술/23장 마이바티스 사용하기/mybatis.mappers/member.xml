@@ -57,32 +57,36 @@
 		]]>
 	</select>
 
-	<select id="searchMember" parameterType="memberVO" resultMap="memResult">
+	<select id="searchMember" parameterType="memberVO"
+		resultMap="memResult">
 		<![CDATA[
 			select * from t_member
 		]]>
 		<where>
 			<choose>
-				<when test="name != '' and name != null and email != '' and email != null">
+				<when
+					test="name != '' and name != null and email != '' and email != null">
 					name = #{name} and email = #{email}
 				</when>
 				<when test="name != '' and name != null">
 					name = #{name}
 				</when>
-				<when test = "email != '' and email != null">
+				<when test="email != '' and email != null">
 					email = #{email}
 				</when>
 			</choose>
 		</where>
 		order by joinDate desc
 	</select>
-	
-	<select id="foreachSelect" resultMap="memResult" parameterType="java.util.Map">
+
+	<select id="foreachSelect" resultMap="memResult"
+		parameterType="java.util.Map">
 		<![CDATA[
 			select * from t_member
 		]]>
 		where name in
-		<foreach item="item" collection="list" open="(" separator="," close=")" >
+		<foreach item="item" collection="list" open="(" separator=","
+			close=")">
 			#{item}
 		</foreach>
 		order by joinDate desc
@@ -95,13 +99,24 @@
 		]]>
 	</insert>
 
+	<insert id="foreachInsert" parameterType="java.util.Map">
+		<foreach item="item" collection="list" open="INSERT ALL"
+			separator=" " close="SELECT * FROM DUAL">
+			INTO t_member(id, pwd, name, email)
+			VALUES (#{item.id},
+			#{item.pwd},
+			#{item.name},
+			#{item.email})
+		</foreach>
+	</insert>
+
 	<insert id="insertMember2" parameterType="java.util.HashMap">
 		<![CDATA[
 			insert into t_member(id, pwd, name, email)
 			values(#{id}, #{pwd}, #{name}, #{email})
 		]]>
 	</insert>
-	
+
 	<update id="updateMember" parameterType="memberVO">
 		<![CDATA[
 			update t_member
@@ -109,12 +124,12 @@
 			where id = #{id}
 		]]>
 	</update>
-	
+
 	<delete id="deleteMember" parameterType="String">
 		<![CDATA[
 			delete from t_member
 			where id = #{id}
 		]]>
 	</delete>
-	
+
 </mapper>
