@@ -2,6 +2,7 @@ package com.spring.ex04;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,6 +95,14 @@ public class MemberServlet extends HttpServlet {
 			memberVO.setName(name);
 			memberVO.setEmail(email);
 			List<MemberVO> membersList = dao.searchMember(memberVO);
+			request.setAttribute("membersList", membersList);
+			nextPage = "test03/listMembers.jsp";
+		} else if(action.equals("foreachSelect")) {
+			List<String> nameList = new ArrayList();
+			nameList.add("홍길동");
+			nameList.add("차범근");
+			nameList.add("이순신");
+			List<MemberVO> membersList = dao.foreachSelect(nameList);
 			request.setAttribute("membersList", membersList);
 			nextPage = "test03/listMembers.jsp";
 		}

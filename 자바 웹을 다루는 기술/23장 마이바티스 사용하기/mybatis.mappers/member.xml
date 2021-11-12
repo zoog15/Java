@@ -62,14 +62,29 @@
 			select * from t_member
 		]]>
 		<where>
-			<!-- name 속성 값을 체크해 공백이 아니거나 null이 아니면 'name=name 속성 값' 조건절을 SQL문 뒤에 추가 -->
-			<if test="name != '' and name != null">
-				name = #{name}
-			</if>
-			<if test="email != '' and email != null">
-				and email=#{email}
-			</if>
+			<choose>
+				<when test="name != '' and name != null and email != '' and email != null">
+					name = #{name} and email = #{email}
+				</when>
+				<when test="name != '' and name != null">
+					name = #{name}
+				</when>
+				<when test = "email != '' and email != null">
+					email = #{email}
+				</when>
+			</choose>
 		</where>
+		order by joinDate desc
+	</select>
+	
+	<select id="foreachSelect" resultMap="memResult" parameterType="java.util.Map">
+		<![CDATA[
+			select * from t_member
+		]]>
+		where name in
+		<foreach item="item" collection="list" open="(" separator="," close=")" >
+			#{item}
+		</foreach>
 		order by joinDate desc
 	</select>
 
