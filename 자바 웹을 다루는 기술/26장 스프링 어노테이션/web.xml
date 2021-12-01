@@ -3,7 +3,7 @@
 	xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://Java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
-<!-- 	 
+		 
    <listener>
       <listener-class>
          org.springframework.web.context.ContextLoaderListener
@@ -15,8 +15,6 @@
           /WEB-INF/config/action-mybatis.xml
       </param-value>
    </context-param>  
-
-	-->
 	
 	<servlet>
 		<servlet-name>action</servlet-name>
