@@ -34,7 +34,7 @@
 	</bean>
 	
 	<!--  
-	<bean id="memberDAO" class="com.spring.member.com.spring.com.myspring.com.myspring.pro30.dao.MemberDAOImpl">
+	<bean id="memberDAO" class="com.spring.member.com.spring.com.myspring.com.myspring.pro30.member.com.myspring.pro30.board.dao.MemberDAOImpl">
 		<property name="sqlSession" ref="sqlSession"></property>
 	</bean>
 	-->
